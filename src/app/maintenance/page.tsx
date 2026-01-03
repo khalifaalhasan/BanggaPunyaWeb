@@ -1,66 +1,61 @@
-import Image from "next/image";
+import { Metadata } from "next";
 
-export const metadata = {
-  title: "Under Development | BanggaPunyaWeb",
-  description: "Kami sedang merancang sesuatu yang luar biasa untuk Anda.",
+export const metadata: Metadata = {
+  title: "Under Maintenance | BanggaPunyaWeb",
+  description: "Website sedang dalam peningkatan performa.",
 };
 
 export default function MaintenancePage() {
   return (
-    <div className="relative min-h-screen bg-[#020617] flex flex-col items-center justify-center overflow-hidden font-sans">
-      {/* Efek Cahaya Latar Belakang (Glow) */}
-      <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] bg-orange-500/10 blur-[120px] rounded-full" />
-      <div className="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] bg-blue-500/10 blur-[120px] rounded-full" />
+    // Background Putih Bersih (bg-white)
+    // Teks Gelap (text-slate-900)
+    // h-screen & overflow-hidden = Kunci Anti-Scroll
+    <div className="relative h-screen w-full bg-white flex flex-col items-center justify-center overflow-hidden font-sans text-slate-900">
+      
+      {/* Dekorasi Background: Bias Merah Halus */}
+      {/* Memberikan nuansa branding tanpa mengganggu teks */}
+      <div className="absolute top-0 left-0 w-full h-1/2 bg-gradient-to-b from-red-50/50 to-transparent pointer-events-none" />
+      <div className="absolute -bottom-1/4 -right-1/4 w-[50vh] h-[50vh] bg-red-600/5 blur-[100px] rounded-full pointer-events-none" />
 
-      {/* Main Content Card */}
-      <div className="relative z-10 flex flex-col items-center px-6 max-w-4xl">
-        {/* GIF Container dengan Border Halus */}
-        <div className="relative w-full max-w-[450px] aspect-video mb-12 group">
-          <div className="absolute -inset-1 bg-gradient-to-r from-orange-500 to-blue-600 rounded-2xl blur opacity-20 group-hover:opacity-40 transition duration-1000"></div>
-          <div className="relative bg-[#0f172a] rounded-2xl p-4 border border-white/10 shadow-2xl">
-            <Image
-              src="/gif/maintenance.json"
-              alt="Development Illustration"
-              width={500}
-              height={500}
-              className="rounded-lg object-contain w-full h-auto"
-              priority
-            />
-          </div>
+      <main className="relative z-10 flex flex-col items-center text-center max-w-3xl px-6">
+        
+        {/* Badge Status - Aksen Merah */}
+        <div className="mb-8 inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-red-50 border border-red-100">
+          <span className="relative flex h-2.5 w-2.5">
+            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"></span>
+            <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-red-600"></span>
+          </span>
+          <span className="text-red-600 text-[10px] font-extrabold tracking-[0.25em] uppercase">
+            Maintenance Mode
+          </span>
         </div>
 
-        {/* Text Area */}
-        <div className="space-y-6">
-          <div className="inline-block px-4 py-1.5 mb-2 rounded-full border border-orange-500/30 bg-orange-500/5 text-orange-400 text-xs font-bold uppercase tracking-[0.2em]">
-            Status: Under Development
-          </div>
+        {/* Headline Tipografi Besar */}
+        {/* Menggunakan kontras Hitam & Merah */}
+        <h1 className="text-5xl md:text-8xl font-black tracking-tighter leading-[0.9] mb-6">
+          Koding <span className="text-red-600">Dulu</span>, <br />
+          Keren <span className="relative inline-block">
+            Kemudian.
+            {/* Garis bawah dekoratif */}
+            <span className="absolute bottom-2 left-0 w-full h-[10px] bg-red-600/10 -z-10 skew-x-12"></span>
+          </span>
+        </h1>
 
-          <h1 className="text-4xl md:text-7xl font-extrabold text-white tracking-tight leading-[1.1]">
-            We are{" "}
-            <span className="bg-clip-text text-transparent bg-gradient-to-r from-orange-400 to-orange-600">
-              Building
-            </span>{" "}
-            <br />
-            Something Bold.
-          </h1>
+        {/* Subtext - Abu-abu agar mata tidak lelah */}
+        <p className="text-slate-500 text-base md:text-xl font-medium leading-relaxed max-w-lg mx-auto mb-12">
+          Kami sedang meracik ulang sistem agar performa website bisnis Anda makin ngebut dan maksimal.
+        </p>
 
-          <p className="text-gray-400 text-lg md:text-xl max-w-2xl mx-auto leading-relaxed font-light">
-            BanggaPunyaWeb sedang melakukan pembaruan sistem untuk memberikan
-            pengalaman digital terbaik bagi bisnis Anda. Sampai jumpa beberapa
-            saat lagi!
+        {/* Footer Brand - Minimalis */}
+        <div className="flex flex-col items-center gap-3 group cursor-default">
+          {/* Garis Pemisah Merah Kecil */}
+          <div className="h-[2px] w-12 bg-red-600 transition-all duration-300 group-hover:w-20"></div>
+          <p className="text-slate-400 text-[10px] tracking-[0.4em] font-bold uppercase">
+            BanggaPunyaWeb Agency
           </p>
         </div>
 
-        {/* Info Agency */}
-        <div className="mt-16 flex items-center gap-4 text-white/40 text-sm tracking-widest">
-          <span className="w-8 h-[1px] bg-white/20"></span>
-          BANGGAPUNYAWEB AGENCY
-          <span className="w-8 h-[1px] bg-white/20"></span>
-        </div>
-      </div>
-
-      {/* Grid Pattern Background (Opsional) */}
-      <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-20 pointer-events-none"></div>
+      </main>
     </div>
   );
 }
