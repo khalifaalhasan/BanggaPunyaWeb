@@ -1,0 +1,154 @@
+openapi: 3.0.0
+info:
+  title: BanggaPunyaWeb API Documentation
+  description: Dokumentasi API untuk integrasi antara Dashboard Admin dan Website Utama.
+  version: 1.0.0
+
+servers:
+  - url: https://admin.banggapunyaweb.com/api
+    description: Production Server (Admin Subdomain)
+
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+
+  schemas:
+    # Schema untuk Layanan (Sesuai Zod Validation)
+    Layanan:
+      type: object
+      required: [nama_layanan, slug, harga]
+      properties:
+        id:
+          type: string
+          format: uuid
+        nama_layanan:
+          type: string
+          example: "Jasa Pembuatan Landing Page"
+        slug:
+          type: string
+          example: "jasa-pembuatan-landing-page"
+        harga:
+          type: integer
+          example: 1500000
+        deskripsi:
+          type: string
+        image_url:
+          type: string
+          format: uri
+
+    # Schema untuk Portfolio
+    Portfolio:
+      type: object
+      properties:
+        id:
+          type: string
+        judul:
+          type: string
+        slug:
+          type: string
+        kategori:
+          type: string
+          example: "E-Commerce"
+        client_name:
+          type: string
+        image_url:
+          type: string
+
+paths:
+  # ROUTE LAYANAN
+  /layanan:
+    get:
+      summary: Ambil semua daftar layanan
+      tags: [Layanan]
+      responses:
+        200:
+          description: Berhasil mengambil data
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Layanan"
+    post:
+      summary: Tambah layanan baru (Admin Only)
+      tags: [Layanan]
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Layanan"
+      responses:
+        201:
+          description: Layanan berhasil dibuat
+
+  /layanan/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+    put:
+      summary: Update data layanan
+      tags: [Layanan]
+      security:
+        - bearerAuth: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Layanan"
+      responses:
+        200:
+          description: Update berhasil
+    delete:
+      summary: Hapus layanan
+      tags: [Layanan]
+      security:
+        - bearerAuth: []
+      responses:
+        204:
+          description: Berhasil dihapus
+
+  # ROUTE PORTFOLIO
+  /portfolio:
+    get:
+      summary: Daftar portfolio dengan filter kategori
+      tags: [Portfolio]
+      parameters:
+        - name: kategori
+          in: query
+          schema:
+            type: string
+      responses:
+        200:
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Portfolio"
+
+  # ROUTE KONTAK (Submission dari Main Site)
+  /kontak:
+    post:
+      summary: Kirim pesan dari form kontak website utama
+      tags: [Kontak]
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                nama: { type: string }
+                email: { type: string, format: email }
+                pesan: { type: string }
+      responses:
+        200:
+          description: Pesan berhasil terkirim
