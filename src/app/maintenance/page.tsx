@@ -1,84 +1,62 @@
-import { Metadata } from "next";
-import { Construction, Mail, ArrowRight } from "lucide-react";
-import { Button } from "@/components/ui/button";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
-import { Input } from "@/components/ui/input";
-import { Separator } from "@/components/ui/separator";
+import Image from "next/image";
 
-export const metadata: Metadata = {
-  title: "Under Maintenance",
-  robots: {
-    index: false, // Penting: Jangan sampai Google mengindeks halaman maintenance
-    follow: false,
-  },
+export const metadata = {
+  title: "Under Development | BanggaPunyaWeb",
+  description: "Kami sedang merancang sesuatu yang luar biasa untuk Anda.",
 };
 
 export default function MaintenancePage() {
   return (
-    <div className="min-h-screen w-full flex items-center justify-center bg-slate-50 dark:bg-slate-950 p-4 relative overflow-hidden">
-      {/* Background Pattern */}
-      <div className="absolute inset-0 h-full w-full bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:24px_24px]"></div>
+    <div className="relative min-h-screen bg-[#020617] flex flex-col items-center justify-center overflow-hidden font-sans">
+      
+      {/* Efek Cahaya Latar Belakang (Glow) */}
+      <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] bg-orange-500/10 blur-[120px] rounded-full" />
+      <div className="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] bg-blue-500/10 blur-[120px] rounded-full" />
 
-      <Card className="w-full max-w-lg shadow-xl relative z-10 backdrop-blur-sm bg-white/90 dark:bg-slate-900/90 border-slate-200 dark:border-slate-800">
-        <CardHeader className="text-center pb-2">
-          <div className="mx-auto bg-primary/10 p-3 rounded-full w-fit mb-4">
-            <Construction className="w-10 h-10 text-primary animate-pulse" />
+      {/* Main Content Card */}
+      <div className="relative z-10 flex flex-col items-center px-6 max-w-4xl">
+        
+        {/* GIF Container dengan Border Halus */}
+        <div className="relative w-full max-w-[450px] aspect-video mb-12 group">
+          <div className="absolute -inset-1 bg-gradient-to-r from-orange-500 to-blue-600 rounded-2xl blur opacity-20 group-hover:opacity-40 transition duration-1000"></div>
+          <div className="relative bg-[#0f172a] rounded-2xl p-4 border border-white/10 shadow-2xl">
+            <Image
+              src="/gif/maintenance.gif"
+              alt="Development Illustration"
+              width={500}
+              height={500}
+              className="rounded-lg object-contain w-full h-auto"
+              priority
+            />
           </div>
-          <CardTitle className="text-2xl font-bold tracking-tight">
-            Sedang Dalam Pengembangan
-          </CardTitle>
-          <CardDescription className="text-base mt-2">
-            Website ini sedang dibangun. Silakan kembali lagi nanti.
-          </CardDescription>
-        </CardHeader>
+        </div>
 
-        <CardContent className="space-y-4 mt-4">
-          <div className="space-y-2">
-            <p className="text-sm font-medium text-center text-muted-foreground">
-              Notify me when available:
-            </p>
-            <form
-              className="flex space-x-2"
-              onSubmit={(e) => e.preventDefault()}
-            >
-              <Input
-                type="email"
-                placeholder="email@anda.com"
-                className="flex-1"
-              />
-              <Button type="submit">Kirim</Button>
-            </form>
+        {/* Text Area */}
+        <div className="space-y-6">
+          <div className="inline-block px-4 py-1.5 mb-2 rounded-full border border-orange-500/30 bg-orange-500/5 text-orange-400 text-xs font-bold uppercase tracking-[0.2em]">
+            Status: Under Development
           </div>
+          
+          <h1 className="text-4xl md:text-7xl font-extrabold text-white tracking-tight leading-[1.1]">
+            We are <span className="bg-clip-text text-transparent bg-gradient-to-r from-orange-400 to-orange-600">Building</span> <br /> 
+            Something Bold.
+          </h1>
 
-          <div className="flex items-center gap-4 my-6">
-            <Separator className="flex-1" />
-            <span className="text-xs text-muted-foreground uppercase">
-              Info
-            </span>
-            <Separator className="flex-1" />
-          </div>
-
-          <div className="text-center text-sm text-muted-foreground">
-            Developer?{" "}
-            <a href="/login" className="underline hover:text-primary">
-              Login Admin
-            </a>
-          </div>
-        </CardContent>
-
-        <CardFooter className="bg-slate-50 dark:bg-slate-900/50 flex justify-center py-4 rounded-b-lg">
-          <p className="text-xs text-muted-foreground">
-            &copy; {new Date().getFullYear()} Project Name.
+          <p className="text-gray-400 text-lg md:text-xl max-w-2xl mx-auto leading-relaxed font-light">
+            BanggaPunyaWeb sedang melakukan pembaruan sistem untuk memberikan pengalaman digital terbaik bagi bisnis Anda. Sampai jumpa beberapa saat lagi!
           </p>
-        </CardFooter>
-      </Card>
+        </div>
+
+        {/* Info Agency */}
+        <div className="mt-16 flex items-center gap-4 text-white/40 text-sm tracking-widest">
+            <span className="w-8 h-[1px] bg-white/20"></span>
+            BANGGAPUNYAWEB AGENCY
+            <span className="w-8 h-[1px] bg-white/20"></span>
+        </div>
+      </div>
+
+      {/* Grid Pattern Background (Opsional) */}
+      <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-20 pointer-events-none"></div>
     </div>
   );
 }
