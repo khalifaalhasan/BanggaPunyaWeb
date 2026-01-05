@@ -54,12 +54,12 @@ export function FloatingHeader() {
         {/* 3. CTA & MOBILE TRIGGER */}
         <div className="flex items-center gap-3 z-10">
           <Button
-            size={scrolled ? "sm" : "default"}
+            size="lg" // Agar terlihat 'fat' seperti di gambar
             className={cn(
-              "hidden md:flex rounded-full font-bold transition-all duration-300",
+              "rounded-full font-bold transition-all duration-300 shadow-md hover:-translate-y-0.5",
               scrolled
-                ? "bg-secondary text-secondary-foreground shadow-md"
-                : "bg-white text-primary hover:bg-slate-100 shadow-lg"
+                ? "bg-secondary text-secondary-foreground hover:bg-secondary/90 hover:shadow-lg" // SCROLLED: Kuning (image_b8583e.png)
+                : "bg-white text-primary hover:bg-white/90 hover:text-red-700 hover:shadow-white/20" // TOP: Putih Teks Merah (image_b85845.png)
             )}
           >
             Order Sekarang
