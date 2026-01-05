@@ -1,0 +1,4 @@
+npx supabase gen types typescript --project-id "vacozkxycabnblvloygy" > src/types/supabase.ts
+
+
+copy code ini biar types/supabase otomatis update
