@@ -39,10 +39,8 @@ export function DesktopNav({ scrolled }: DesktopNavProps) {
         <NavigationMenuList className="gap-1">
           {/* Beranda */}
           <NavigationMenuItem>
-            <Link href="/" legacyBehavior passHref>
-              <NavigationMenuLink className={linkStyles}>
-                Beranda
-              </NavigationMenuLink>
+            <Link href="/" className="text-red-500">
+              Beranda
             </Link>
           </NavigationMenuItem>
 
@@ -79,10 +77,8 @@ export function DesktopNav({ scrolled }: DesktopNavProps) {
 
           {/* Portofolio */}
           <NavigationMenuItem>
-            <Link href="/portfolio" legacyBehavior passHref>
-              <NavigationMenuLink className={linkStyles}>
-                Portofolio
-              </NavigationMenuLink>
+            <Link href="/portfolio" className="text-red-500">
+              Portfolio
             </Link>
           </NavigationMenuItem>
         </NavigationMenuList>
