@@ -1,23 +1,34 @@
-export type Client = {
-  id: string;
-  nama: string;
-  image_url: string | null;
-  website_url: string | null;
+import { Database } from "@/types/supabase"; // Import kamus database kita
+import { z } from "zod";
+import { ContactSchema } from "@/schemas/contact";
+
+// --- 1. HELPER (Biar kodingan bersih) ---
+type Tables<T extends keyof Database["public"]["Tables"]> =
+  Database["public"]["Tables"][T]["Row"];
+
+// --- 2. TIPE DATA UTAMA (Ambil langsung dari Supabase) ---
+
+export type Client = Tables<"our_clients">;
+// ^ Otomatis tau isinya: id, nama, image_url, dll.
+
+export type Service = Tables<"services"> & {
+  category_name?: string | null; // Kolom tambahan dari join
 };
+
+export type Portfolio = Tables<"portfolios"> & {
+  kategori?: string | null; // Kolom tambahan dari join
+};
+
+// INI DIA BINTANG UTAMA KITA: BLOG POST
+export type Post = Tables<"blog_posts">;
+// ^ Otomatis tau isinya: id, title, slug, content, thumbnail_url, dll.
+
+// --- 3. TIPE DATA RESPONSE API ---
 
 export type GetClientsResponse = {
   success: boolean;
   data?: Client[];
   error?: string;
-};
-
-export type Service = {
-  id: string;
-  nama_layanan: string; // Dulu title
-  slug: string;
-  harga: number; // Dulu price_estimate
-  deskripsi: string | null;
-  image_url: string | null;
 };
 
 export type GetServicesResponse = {
@@ -26,39 +37,26 @@ export type GetServicesResponse = {
   error?: string;
 };
 
-export type Portfolio = {
-  id: string;
-  judul: string;
-  slug: string;
-  kategori: string | null;
-  client_name: string | null;
-  image_url: string | null;
-};
-
 export type GetPortfoliosResponse = {
   success: boolean;
   data?: Portfolio[];
   error?: string;
 };
 
-// export type ContactInput = {
-//   nama: string;
-//   email: string;
-//   nomor_telepon: string;
-//   judul: string;
-//   pesan: string;
-// };
+export type GetPostsResponse = {
+  success: boolean;
+  data?: Post[];
+  error?: string;
+};
 
-import { z } from "zod";
-import { ContactSchema } from "@/schemas/contact";
+// --- 4. TIPE DATA INPUT (FORM) ---
 
-// atau bisa dengan
 export type ContactInput = z.infer<typeof ContactSchema>;
 
 export type ActionResponse = {
   success: boolean;
   message: string;
-  error?: {
+  errors?: {
     [key: string]: string[];
   };
 };
