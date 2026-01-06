@@ -19,10 +19,7 @@ interface DesktopNavProps {
 }
 
 export function DesktopNav({ scrolled }: DesktopNavProps) {
-<<<<<<< HEAD
-=======
   const pathname = usePathname(); // Ambil path aktif
->>>>>>> 2776f2297d5f9d60bd90ccd989efe541b14b22b7
   // 1. BASE STYLE (Bentuk dasar tombol nav)
   const baseTriggerStyle =
     "group inline-flex h-10 w-max items-center justify-center rounded-full px-4 py-2 text-sm font-bold transition-all duration-300 outline-none disabled:pointer-events-none disabled:opacity-50";
@@ -34,8 +31,6 @@ export function DesktopNav({ scrolled }: DesktopNavProps) {
     : // TOP (Background Merah): Teks Putih -> Hover Putih Transparan
       "text-white/90 hover:text-white hover:bg-white/10 focus:bg-white/10 data-[active]:text-white data-[state=open]:bg-white/10";
 
-<<<<<<< HEAD
-=======
   const handleHomeClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
     if (pathname === "/") {
       e.preventDefault();
@@ -43,7 +38,6 @@ export function DesktopNav({ scrolled }: DesktopNavProps) {
     }
   };
 
->>>>>>> 2776f2297d5f9d60bd90ccd989efe541b14b22b7
   const finalClass = cn(baseTriggerStyle, navStyles);
 
   return (
@@ -52,20 +46,12 @@ export function DesktopNav({ scrolled }: DesktopNavProps) {
         <NavigationMenuList>
           {/* --- BERANDA --- */}
           <NavigationMenuItem>
-<<<<<<< HEAD
-            <Link href="/" legacyBehavior passHref>
-              <NavigationMenuLink className={finalClass}>
-                Beranda
-              </NavigationMenuLink>
-            </Link>
-=======
             {/* PENTING: Gunakan asChild di NavigationMenuLink */}
             <NavigationMenuLink asChild>
               <Link href="/" onClick={handleHomeClick} className={finalClass}>
                 Beranda
               </Link>
             </NavigationMenuLink>
->>>>>>> 2776f2297d5f9d60bd90ccd989efe541b14b22b7
           </NavigationMenuItem>
 
           <NavigationMenuItem>
@@ -107,19 +93,11 @@ export function DesktopNav({ scrolled }: DesktopNavProps) {
 
           {/* --- PORTFOLIO --- */}
           <NavigationMenuItem>
-<<<<<<< HEAD
-            <Link href="/portfolio" legacyBehavior passHref>
-              <NavigationMenuLink className={finalClass}>
-                Portfolio
-              </NavigationMenuLink>
-            </Link>
-=======
             <NavigationMenuLink asChild>
               <Link href="/portfolio" className={finalClass}>
                 Portfolio
               </Link>
             </NavigationMenuLink>
->>>>>>> 2776f2297d5f9d60bd90ccd989efe541b14b22b7
           </NavigationMenuItem>
         </NavigationMenuList>
       </NavigationMenu>

@@ -1,6 +1,8 @@
 import { MetadataRoute } from "next";
 import { getPortfolios } from "@/actions/portfolio"; // Import action portfolio Anda
 
+export const dynamic = "force-dynamic";
+
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   // 1. Ganti dengan domain asli Anda (tanpa slash di akhir)
   // Sebaiknya taruh di .env: process.env.NEXT_PUBLIC_BASE_URL
@@ -22,10 +24,10 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   // 3. Data Dinamis (Ambil dari Database Supabase)
   // Agar setiap portfolio baru langsung masuk Google
   let portfolioRoutes: MetadataRoute.Sitemap = [];
-  
+
   try {
     const { data: portfolios } = await getPortfolios();
-    
+
     if (portfolios && portfolios.length > 0) {
       portfolioRoutes = portfolios.map((item) => ({
         url: `${baseUrl}/portfolio/${item.slug}`, // Pastikan slug ada di database
