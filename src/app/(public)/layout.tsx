@@ -1,5 +1,5 @@
 import { Footer } from "@/components/layouts/footer";
-import { FloatingHeader } from "@/components/layouts/navbar/floating-header.tsx";
+import { FloatingHeader } from "@/components/layouts/navbar/floating-header";
 
 export default function RootLayout({
   children,
@@ -13,8 +13,8 @@ export default function RootLayout({
         <FloatingHeader />
 
         {children}
+        <Footer />
       </body>
-      <Footer />
     </html>
   );
 }

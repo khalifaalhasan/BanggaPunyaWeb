@@ -9,8 +9,32 @@ import { Button } from "@/components/ui/button";
 // Import komponen yang sudah dipisah
 import { DesktopNav } from "./dekstop-nav";
 import { MobileNav } from "./mobile-nav";
+import { usePathname } from "next/navigation";
 
 export function FloatingHeader() {
+  const pathname = usePathname(); // 1. Ambil path saat ini
+
+  // 2. Logic Scroll
+  const handleLogoClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    // Cek apakah user sedang berada di Homepage ("/")
+    if (pathname === "/") {
+      e.preventDefault(); // Mencegah reload/navigasi ulang
+
+      // Opsi A: Scroll ke paling atas (Paling aman & umum)
+      window.scrollTo({
+        top: 0,
+        behavior: "smooth",
+      });
+
+      // Opsi B: Scroll spesifik ke element ID "hero"
+      /*
+      const heroSection = document.getElementById("hero");
+      if (heroSection) {
+        heroSection.scrollIntoView({ behavior: "smooth" });
+      }
+      */
+    }
+  };
   const [scrolled, setScrolled] = React.useState(false);
 
   React.useEffect(() => {
@@ -37,15 +61,14 @@ export function FloatingHeader() {
         )}
       >
         {/* 1. BRAND LOGO */}
-        <Link href="/" className="flex items-center gap-2 z-10">
-          <span
-            className={cn(
-              "font-bold text-xl tracking-tight transition-colors duration-300",
-              scrolled ? "text-primary" : "text-white"
-            )}
-          >
-            {branding.brandName}
-          </span>
+        <Link
+          href="/"
+          onClick={handleLogoClick}
+          className="text-xl font-bold font-mono tracking-tighter flex items-center gap-2"
+        >
+          {/* Contoh Icon/Logo */}
+          <div className="w-8 h-8 bg-red-600 rounded-full" />
+          Bangga Punya Web
         </Link>
 
         {/* 2. DESKTOP NAV */}
@@ -54,12 +77,12 @@ export function FloatingHeader() {
         {/* 3. CTA & MOBILE TRIGGER */}
         <div className="flex items-center gap-3 z-10">
           <Button
-            size={scrolled ? "sm" : "default"}
+            size="lg" // Agar terlihat 'fat' seperti di gambar
             className={cn(
-              "hidden md:flex rounded-full font-bold transition-all duration-300",
+              "rounded-full font-bold transition-all duration-300 shadow-md hover:-translate-y-0.5 ",
               scrolled
-                ? "bg-secondary text-secondary-foreground shadow-md"
-                : "bg-white text-primary hover:bg-slate-100 shadow-lg"
+                ? "bg-secondary text-secondary-foreground hover:bg-secondary/90 hover:shadow-lg" // SCROLLED: Kuning (image_b8583e.png)
+                : "bg-white text-primary hover:bg-white/90 hover:text-red-700 hover:shadow-white/20" // TOP: Putih Teks Merah (image_b85845.png)
             )}
           >
             Order Sekarang

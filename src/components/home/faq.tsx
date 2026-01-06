@@ -6,6 +6,8 @@ import { Plus, Minus, MessageCircle } from "lucide-react";
 import { SectionHeader } from "../shared/section-header";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
+import { SecondaryButton } from "../shared/secondary-button";
+import { WhatsAppButton } from "../shared/whatsapp-button";
 
 // --- 1. DATA FAQ & KATEGORI ---
 const categories = ["All", "Umum", "Harga & Layanan", "Teknis"];
@@ -76,11 +78,13 @@ export function FAQSection() {
               Jawaban untuk pertanyaan umum seputar jasa kami.
             </p>
           </div>
-
-          <Button className="rounded-full px-6 bg-primary hover:bg-red-700 shadow-lg shadow-red-500/20">
-            <MessageCircle className="w-4 h-4 mr-2" />
-            Hubungi Kami
-          </Button>
+          <div>
+            <WhatsAppButton
+              mode="default"
+              label="Hubungi Kami"
+              icon={<MessageCircle className="w-4 h-4" />}
+            />
+          </div>
         </div>
 
         {/* --- CATEGORY TABS (Pills) --- */}
