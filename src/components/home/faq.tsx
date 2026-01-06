@@ -7,7 +7,7 @@ import { SectionHeader } from "../shared/section-header";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { SecondaryButton } from "../shared/secondary-button";
-import { WhatsAppButton } from "../shared/WhatsappButton";
+import { WhatsAppButton } from "../shared/whatsapp-button";
 
 // --- 1. DATA FAQ & KATEGORI ---
 const categories = ["All", "Umum", "Harga & Layanan", "Teknis"];

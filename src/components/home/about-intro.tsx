@@ -5,7 +5,7 @@ import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, CheckCircle2 } from "lucide-react";
 import { CTAButton } from "../shared/CTA-button";
-import { WhatsAppButton } from "../shared/WhatsappButton";
+import { WhatsAppButton } from "../shared/whatsapp-button";
 
 // --- 1. DATA PORTFOLIO (MOCK JSON) ---
 // Nanti bisa diganti dengan props atau fetch dari database
@@ -205,11 +205,7 @@ export function AboutIntro() {
             </div>
 
             <div className="flex flex-col sm:flex-row gap-4">
-              <WhatsAppButton
-                label="Konsultasi Sekarang"
-                mode="consult"
-                
-              />
+              <WhatsAppButton label="Konsultasi Sekarang" mode="consult" />
             </div>
           </motion.div>
         </div>

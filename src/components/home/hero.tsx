@@ -8,7 +8,7 @@ import { TypeAnimation } from "react-type-animation";
 import { motion } from "framer-motion";
 import { cn } from "@/lib/utils";
 import { CTAButton } from "../shared/CTA-button";
-import { WhatsAppButton } from "../shared/WhatsappButton";
+import { WhatsAppButton } from "../shared/whatsapp-button";
 import { SecondaryButton } from "../shared/secondary-button";
 
 interface HeroSectionProps {
