@@ -6,6 +6,12 @@ import { SectionHeader } from "../shared/section-header"; // Pastikan path ini s
 import { cn } from "@/lib/utils";
 import { motion } from "framer-motion";
 
+interface PricingSectionProps {
+  // Tambahkan ini agar komponen menerima prop 'id' (opsional/tanda tanya)
+  id?: string;
+  className?: string; // Opsional: jika ingin tambah class dari luar
+}
+
 // --- DATA PAKET HARGA ---
 const pricingPackages = [
   {
@@ -90,9 +96,12 @@ const pricingPackages = [
   },
 ];
 
-export function PricingSection() {
+export function PricingSection({ id, className }: PricingSectionProps) {
   return (
-    <section className="py-20 bg-white relative overflow-hidden ">
+    <section
+      id={id}
+      className={`py-20 bg-white relative overflow-hidden ${className || ""} `}
+    >
       <div className="container mx-auto px-4 max-w-7xl">
         {/* Header Section */}
         <SectionHeader

@@ -7,6 +7,7 @@ import { ArrowRight, ExternalLink } from "lucide-react";
 import { SectionHeader } from "../shared/section-header";
 import { cn } from "@/lib/utils";
 import { motion } from "framer-motion";
+import { SecondaryButton } from "../shared/secondary-button";
 
 // --- 1. TIPE DATA (Sesuai dengan Action Anda) ---
 // Nanti ini bisa dipindah ke file @/types/database
@@ -17,6 +18,12 @@ export interface Portfolio {
   image_url: string;
   client_name: string; // Opsional: kadang judul = client name
   kategori: string | null;
+}
+
+interface PortfolioSectionProps {
+  // Tambahkan ini agar komponen menerima prop 'id' (opsional/tanda tanya)
+  id?: string;
+  className?: string; // Opsional: jika ingin tambah class dari luar
 }
 
 // --- 2. DUMMY DATA (Sesuai Structure Action) ---
@@ -71,12 +78,15 @@ const dummyPortfolios: Portfolio[] = [
   },
 ];
 
-export function PortfolioSection() {
+export function PortofolioSection({ id, className }: PortfolioSectionProps) {
   // Nanti: const { data: portfolios } = await getPortfolios();
   const portfolios = dummyPortfolios;
 
   return (
-    <section className="py-20 bg-white">
+    <section
+      id={id}
+      className={`py-20 scroll-mt-28 bg-white ${className || ""}`}
+    >
       <div className="container max-w-6xl mx-auto px-4">
         {/* Header */}
         <SectionHeader
@@ -142,12 +152,10 @@ export function PortfolioSection() {
         {/* Button "Lihat Semua" */}
         <div className="mt-12 text-center">
           <Link href="/portfolio">
-            <Button
-              size="lg"
-              className="rounded-full bg-secondary text-secondary-foreground hover:bg-amber-400 font-bold px-8 shadow-lg transition-transform hover:-translate-y-1"
-            >
-              Lihat Semua Portfolio
-            </Button>
+            <SecondaryButton
+              label="lihat Portfolio selengkapnya"
+              href="/portfolio"
+            />
           </Link>
         </div>
       </div>

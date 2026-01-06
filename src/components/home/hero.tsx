@@ -7,7 +7,14 @@ import { FileText, ChevronRight } from "lucide-react";
 import { TypeAnimation } from "react-type-animation";
 import { motion } from "framer-motion";
 import { cn } from "@/lib/utils";
+import { CTAButton } from "../shared/CTA-button";
+import { WhatsAppButton } from "../shared/WhatsappButton";
+import { SecondaryButton } from "../shared/secondary-button";
 
+interface HeroSectionProps {
+  id?: string;
+  className?: string;
+}
 // --- DATA SERVICES ---
 const services = [
   {
@@ -79,9 +86,14 @@ function ServiceItem({
 }
 
 // --- MAIN COMPONENT ---
-export function HeroSection() {
+export function HeroSection({ id, className }: HeroSectionProps) {
   return (
-    <section className="relative bg-white flex flex-col justify-start overflow-hidden">
+    <section
+      id={id}
+      className={`relative bg-white flex flex-col justify-start overflow-hidden ${
+        className || ""
+      }`}
+    >
       {/* 1. BACKGROUND & TEXT HERO */}
       <div className="relative bg-primary pt-28 pb-32 md:pt-36 md:pb-40 lg:pt-40 lg:pb-48 w-full">
         <div className="absolute inset-0 opacity-10 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] pointer-events-none mix-blend-overlay"></div>
@@ -118,19 +130,12 @@ export function HeroSection() {
             </p>
 
             <div className="flex flex-col sm:flex-row items-center justify-center gap-3 px-4">
-              <Button
-                size="lg"
-                className="w-full sm:w-auto rounded-full bg-secondary text-secondary-foreground hover:bg-amber-400 font-bold px-6 py-6 shadow-lg hover:-translate-y-1 transition-transform"
-              >
-                Bikin Website Sekarang
-              </Button>
-              <Button
-                size="lg"
-                variant="outline"
-                className="w-full sm:w-auto rounded-full text-white border-white/30 bg-white/5 hover:bg-white/10 hover:border-white hover:text-primary hover:bg-white px-6 py-6 backdrop-blur-sm"
-              >
-                <FileText className="mr-2 w-4 h-4" /> Minta Penawaran
-              </Button>
+              <WhatsAppButton mode="default" label="Bikin Website" />
+              <SecondaryButton
+                href="/#price"
+                label="Lihat Paket Kami"
+                className="w-full sm:w-auto rounded-full border-gold-gradient text-white bg-transparent border-white/30 bg-white/5 hover:bg-white/10 hover:border-white hover:text-primary hover:bg-white px-6 py-6 backdrop-blur-sm"
+              />
             </div>
           </motion.div>
         </div>
