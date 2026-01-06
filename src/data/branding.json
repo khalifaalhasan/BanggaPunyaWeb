@@ -7,6 +7,11 @@
     "email": "banggapunyaweb@gmail.com",
     "address": "Palembang, Indonesia"
   },
+  "whatsapp_messages": {
+    "default": "Halo, saya mau tanya-tanya seputar jasa pembuatan website.",
+    "order": "Halo, saya tertarik untuk membuat website. Bisa minta info paket harganya?",
+    "consult": "Halo, saya ingin konsultasi dulu mengenai kebutuhan website saya."
+  },
   "links": {
     "instagram": "https://instagram.com/banggapunyaweb",
     "linkedin": "https://linkedin.com/in/banggapunyaweb"

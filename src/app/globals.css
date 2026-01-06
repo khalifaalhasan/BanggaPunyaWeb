@@ -152,4 +152,76 @@
   body {
     @apply bg-background text-foreground;
   }
+  html {
+    /* Ini kuncinya biar scroll-nya meluncur halus */
+    scroll-behavior: smooth;
+  }
+}
+
+@layer utilities {
+  /* Animasi Melayang (Float) */
+  @keyframes float {
+    0%,
+    100% {
+      transform: translateY(0px);
+    }
+    50% {
+      transform: translateY(-20px);
+    }
+  }
+
+  /* Animasi Melayang Delayed (Biar tidak barengan) */
+  @keyframes float-delayed {
+    0%,
+    100% {
+      transform: translateY(0px);
+    }
+    50% {
+      transform: translateY(-15px);
+    }
+  }
+
+  .animate-float {
+    animation: float 6s ease-in-out infinite;
+  }
+
+  .animate-float-delayed {
+    animation: float-delayed 7s ease-in-out infinite;
+    animation-delay: 1s;
+  }
+
+  /* CLASS PENTING: Pause saat hover */
+  .pause-on-hover:hover .animate-float,
+  .pause-on-hover:hover .animate-float-delayed {
+    animation-play-state: paused;
+  }
+}
+
+@layer components {
+  /* 1. Background (Solid) */
+  .bg-gold-gradient {
+    @apply bg-gradient-to-br from-amber-200 via-yellow-400 to-amber-600;
+  }
+
+  /* 2. Text (Typography) */
+  /* Best Practice: Wajib 'bg-clip-text' dan 'text-transparent' */
+  .text-gold-gradient {
+    @apply bg-gradient-to-br from-amber-200 via-yellow-400 to-amber-600 bg-clip-text text-transparent;
+  }
+
+  /* 3. Border / Outline */
+  /* Best Practice Note: 
+     Gradient Border pada elemen 'rounded' (sudut melengkung) di CSS itu "tricky".
+     Teknik di bawah ini menggunakan 'double background' (masking) agar radius tetap jalan.
+     
+     PENTING: Ganti '#0f172a' (slate-900) dengan warna background website Anda 
+     jika bagian tengahnya ingin warna lain.
+  */
+  .border-gold-gradient {
+    border: 2px solid transparent; /* Ukuran ketebalan border */
+    border-radius: 9999px; /* Atau sesuaikan, misal 0.5rem (rounded-lg) */
+    background: linear-gradient(#0f172a, #0f172a) padding-box,
+      /* Warna Dalam (Inner) */
+        linear-gradient(to bottom right, #fde68a, #facc15, #d97706) border-box; /* Warna Border (Outer) */
+  }
 }
