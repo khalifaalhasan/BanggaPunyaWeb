@@ -1,0 +1,26 @@
+{
+  "brandName": "Bangga Punya Web",
+  "tagline": "Jasa Pembuatan Website Profesional",
+  "description": "Bikin website, cepat, dan terjangkau dalam 24 jam.",
+  "contact": {
+    "whatsapp": "+6289518889973",
+    "email": "banggapunyaweb@gmail.com",
+    "address": "Palembang, Indonesia"
+  },
+  "whatsapp_messages": {
+    "default": "Halo, saya mau tanya-tanya seputar jasa pembuatan website.",
+    "order": "Halo, saya tertarik untuk membuat website. Bisa minta info paket harganya?",
+    "consult": "Halo, saya ingin konsultasi dulu mengenai kebutuhan website saya."
+  },
+  "links": {
+    "instagram": "https://instagram.com/banggapunyaweb",
+    "linkedin": "https://linkedin.com/in/banggapunyaweb"
+  },
+  "navigation": [
+    { "title": "Home", "href": "#hero" },
+    { "title": "Keunggulan", "href": "#features" },
+    { "title": "Harga", "href": "#pricing" },
+    { "title": "Portfolio", "href": "#portfolio" },
+    { "title": "FAQ", "href": "#faq" }
+  ]
+}
