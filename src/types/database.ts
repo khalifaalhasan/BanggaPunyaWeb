@@ -49,6 +49,12 @@ export type GetPostsResponse = {
   error?: string;
 };
 
+export type GetSinglePostResponse = {
+  success: boolean;
+  data?: Post; // Perhatikan: Tidak pakai [], karena cuma 1 objek
+  error?: string;
+};
+
 // --- 4. TIPE DATA INPUT (FORM) ---
 
 export type ContactInput = z.infer<typeof ContactSchema>;
