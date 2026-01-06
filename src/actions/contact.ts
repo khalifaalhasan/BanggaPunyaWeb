@@ -28,7 +28,7 @@ export async function submitContact(
       return {
         success: false,
         message: "Mohon periksa kembali inputan Anda.",
-        error: result.error.flatten().fieldErrors,
+        errors: result.error.flatten().fieldErrors,
       };
     }
 

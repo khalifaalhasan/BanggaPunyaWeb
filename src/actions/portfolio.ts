@@ -2,14 +2,12 @@
 
 import { createClient } from "@/lib/supabase/server";
 import { GetPortfoliosResponse, Portfolio } from "@/types/database";
-import { Database } from "@/types/supabase"; // Import Database utama buat ambil definisi Row asli
+import { Database } from "@/types/supabase";
 
-// 1. Buat Tipe Khusus untuk Data Mentah (Hasil Join)
-// Ini merepresentasikan: "Semua kolom Portfolio + Object portfolio_categories"
 type PortfolioRaw = Database["public"]["Tables"]["portfolios"]["Row"] & {
   portfolio_categories: {
     name: string;
-  } | null; // Bisa null kalau kategorinya dihapus/kosong
+  } | null;
 };
 
 export async function getPortfolios(): Promise<GetPortfoliosResponse> {
@@ -18,7 +16,7 @@ export async function getPortfolios(): Promise<GetPortfoliosResponse> {
   try {
     const { data, error } = await supabase
       .from("portfolios")
-      .select("*, portfolio_categories(name)") // Query Join
+      .select("*, portfolio_categories(name)")
       .order("created_at", { ascending: false });
 
     if (error) {
@@ -26,17 +24,12 @@ export async function getPortfolios(): Promise<GetPortfoliosResponse> {
       return { success: false, error: "Gagal mengambil data portfolio." };
     }
 
-    // 2. Gunakan Tipe 'PortfolioRaw' saat mapping
-    // Kita lakukan casting (as unknown as ...) biar TypeScript percaya sama struktur data kita
     const formattedData: Portfolio[] = (data as unknown as PortfolioRaw[]).map(
       (item) => ({
-        ...item, // Copy semua field asli (id, slug, image, dll)
+        ...item,
 
-        // Flattening: Ambil string namenya saja
         kategori: item.portfolio_categories?.name || null,
 
-        // Optional: Kita set undefined biar properti nested ini hilang dari object final
-        // (Biar bersih sesuai tipe 'Portfolio')
         portfolio_categories: undefined as never,
       })
     );
