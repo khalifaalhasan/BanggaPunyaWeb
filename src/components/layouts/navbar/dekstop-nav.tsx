@@ -12,12 +12,14 @@ import {
   NavigationMenuTrigger,
 } from "@/components/ui/navigation-menu";
 import { navItems } from "./nav-data";
+import { usePathname } from "next/navigation";
 
 interface DesktopNavProps {
   scrolled: boolean;
 }
 
 export function DesktopNav({ scrolled }: DesktopNavProps) {
+  const pathname = usePathname(); // Ambil path aktif
   // 1. BASE STYLE (Bentuk dasar tombol nav)
   const baseTriggerStyle =
     "group inline-flex h-10 w-max items-center justify-center rounded-full px-4 py-2 text-sm font-bold transition-all duration-300 outline-none disabled:pointer-events-none disabled:opacity-50";
@@ -29,6 +31,13 @@ export function DesktopNav({ scrolled }: DesktopNavProps) {
     : // TOP (Background Merah): Teks Putih -> Hover Putih Transparan
       "text-white/90 hover:text-white hover:bg-white/10 focus:bg-white/10 data-[active]:text-white data-[state=open]:bg-white/10";
 
+  const handleHomeClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    if (pathname === "/") {
+      e.preventDefault();
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+  };
+
   const finalClass = cn(baseTriggerStyle, navStyles);
 
   return (
@@ -37,11 +46,12 @@ export function DesktopNav({ scrolled }: DesktopNavProps) {
         <NavigationMenuList>
           {/* --- BERANDA --- */}
           <NavigationMenuItem>
-            <Link href="/" legacyBehavior passHref>
-              <NavigationMenuLink className={finalClass}>
+            {/* PENTING: Gunakan asChild di NavigationMenuLink */}
+            <NavigationMenuLink asChild>
+              <Link href="/" onClick={handleHomeClick} className={finalClass}>
                 Beranda
-              </NavigationMenuLink>
-            </Link>
+              </Link>
+            </NavigationMenuLink>
           </NavigationMenuItem>
 
           <NavigationMenuItem>
@@ -83,11 +93,11 @@ export function DesktopNav({ scrolled }: DesktopNavProps) {
 
           {/* --- PORTFOLIO --- */}
           <NavigationMenuItem>
-            <Link href="/portfolio" legacyBehavior passHref>
-              <NavigationMenuLink className={finalClass}>
+            <NavigationMenuLink asChild>
+              <Link href="/portfolio" className={finalClass}>
                 Portfolio
-              </NavigationMenuLink>
-            </Link>
+              </Link>
+            </NavigationMenuLink>
           </NavigationMenuItem>
         </NavigationMenuList>
       </NavigationMenu>
