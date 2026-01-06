@@ -10,7 +10,7 @@ import { SectionLoading } from "@/components/shared/section-loading";
 // --- 2. SERVER COMPONENTS (DATA FETCHING) ---
 // Import biasa, tapi nanti dibungkus Suspense di JSX agar streaming data jalan.
 import ClientSection from "@/components/home/client";
-import { PortfolioSection } from "@/components/home/portfolio";
+import { PortofolioSection } from "@/components/home/portfolio";
 
 // --- 3. DYNAMIC IMPORTS (LAZY LOAD) ---
 // Komponen UI berat yang ada di bawah, di-load saat user scroll.
@@ -21,11 +21,13 @@ const AboutIntro = dynamic(
   { loading: () => <div className="h-40 w-full bg-transparent" /> } // Placeholder ringan
 );
 
-const WhyUsSection = dynamic(
-  () => import("@/components/home/why-us").then((mod) => mod.WhyUsSection),
+const FeatureScrollSection = dynamic(
+  () =>
+    import("@/components/home/feature-scroll").then(
+      (mod) => mod.FeatureScrollSection
+    ),
   { loading: () => <SectionLoading /> }
 );
-
 const ProcessSection = dynamic(
   () => import("@/components/home/process").then((mod) => mod.ProcessSection),
   { loading: () => <SectionLoading /> }
@@ -53,22 +55,23 @@ export default function LandingPage() {
   return (
     <main className="min-h-screen bg-white font-sans selection:bg-red-100 selection:text-primary">
       {/* 1. HERO & PROMO (Langsung Muncul) */}
-      <HeroSection />
+      <HeroSection id="hero" />
       <PromoSection />
 
       {/* 2. SECTION STATIS (Lazy Load JS-nya) */}
+
       <AboutIntro />
-      <WhyUsSection />
+      <FeatureScrollSection />
       <ProcessSection />
 
       {/* 3. PORTFOLIO (Fetch Database + Suspense) */}
       {/* Loading muncul hanya di kotak portfolio sampai data siap */}
       <Suspense fallback={<SectionLoading />}>
-        <PortfolioSection />
+        <PortofolioSection id="Portfolio" />
       </Suspense>
 
       {/* 4. PRICING & TESTIMONI (Lazy Load) */}
-      <PricingSection />
+      <PricingSection id="price" />
       <TestimonialSection />
 
       {/* 5. CLIENT (Fetch Database + Suspense) */}

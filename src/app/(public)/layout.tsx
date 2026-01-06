@@ -13,8 +13,8 @@ export default function RootLayout({
         <FloatingHeader />
 
         {children}
+        <Footer />
       </body>
-      <Footer />
     </html>
   );
 }
