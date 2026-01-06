@@ -1,123 +1,168 @@
 "use client";
 
-import Image from "next/image";
-import branding from "@/data/branding.json";
-import { Button } from "@/components/ui/button";
-import { Phone } from "lucide-react";
 import { motion } from "framer-motion";
+import { MousePointer2 } from "lucide-react";
+import Image from "next/image";
 
 export function PromoSection() {
   return (
     <section className="py-20 md:py-32 bg-white overflow-hidden">
-      <div className="container max-w-6xl mx-auto px-4">
+      {/* --- INJECT STYLE CSS --- */}
+      <style
+        dangerouslySetInnerHTML={{
+          __html: `
+        @keyframes float {
+          0%, 100% { transform: translateY(0px); }
+          50% { transform: translateY(-20px); }
+        }
+        @keyframes float-delayed {
+          0%, 100% { transform: translateY(0px); }
+          50% { transform: translateY(-15px); }
+        }
+        .animate-float { animation: float 6s ease-in-out infinite; }
+        .animate-float-delayed { animation: float-delayed 7s ease-in-out infinite; animation-delay: 1s; }
+        
+        /* PAUSE ANIMATION ON HOVER */
+        .hover-container:hover .animate-float,
+        .hover-container:hover .animate-float-delayed {
+          animation-play-state: paused;
+        }
+      `,
+        }}
+      />
+
+      <div className="container max-w-7xl mx-auto px-4">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
-          {/* --- KOLOM KIRI (TEXT) --- */}
+          {/* --- KOLOM KIRI: TEKS --- */}
           <motion.div
             initial={{ opacity: 0, x: -50 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
-            className="flex flex-col items-start text-left"
+            className="order-2 lg:order-1"
           >
-            {/* Subtitle Emas */}
-            <h4 className="text-secondary font-bold text-sm md:text-base uppercase tracking-wide mb-4">
-              Jasa Pembuatan Website Profesional
-            </h4>
-
-            {/* Headline Besar */}
-            <h2 className="text-3xl md:text-5xl font-extrabold text-slate-900 leading-tight mb-6">
-              Bikin Website Baru Anda Hanya Dalam{" "}
-              <span className="text-primary">24 Jam</span>
+            <h2 className="text-3xl md:text-3xl lg:text-4xl font-extrabold text-slate-900 leading-tight mb-6">
+              Sekedar punya website Aja <br />
+              <span className="text-slate-900">Gak Cukup</span>
             </h2>
 
-            {/* Deskripsi */}
-            <p className="text-slate-500 text-base md:text-lg leading-relaxed mb-8">
-              Jadikan bisnis Anda lebih berkembang dan menguntungkan bersama
-              layanan kami yang menawarkan harga termurah serta didukung oleh
-              tim profesional berpengalaman.
-              <br />
-              <br />
-              Lebih dari <strong>500+ perusahaan</strong> telah mempercayakan
-              pembuatan websitenya kepada {branding.brandName}. Sekarang giliran
-              Anda!
-            </p>
-
-            {/* Tombol CTA (WhatsApp) */}
-            <Button
-              size="lg"
-              className="rounded-full bg-secondary text-secondary-foreground hover:bg-amber-400 font-bold px-8 py-6 text-lg shadow-lg shadow-amber-500/20 transition-transform hover:-translate-y-1"
-              onClick={() =>
-                window.open(
-                  `https://wa.me/${branding.contact.whatsapp}`,
-                  "_blank"
-                )
-              }
-            >
-              <Phone className="mr-2 h-5 w-5" /> Konsultasi Gratis
-            </Button>
+            <div className="space-y-6 text-slate-600 text-base md:text-lg leading-relaxed text-justify">
+              <p>
+                Bayangkan Anda memiliki sebuah toko fisik di lokasi yang
+                terpencil, dengan etalase yang kusam, dan layout yang
+                membingungkan. Apakah pengunjung akan tertarik masuk? Mungkin
+                beberapa orang, tetapi kebanyakan akan beralih ke toko lain yang
+                terlihat lebih menarik dan mudah diakses.
+              </p>
+              <p>
+                Begitu juga dengan dunia online. Website yang hanya ada tanpa
+                strategi yang matang dan desain yang user-friendly akan sulit
+                menarik perhatian. Nuhaweb akan mengubah website biasa menjadi
+                mesin konversi.
+              </p>
+            </div>
           </motion.div>
 
-          {/* --- KOLOM KANAN (GAMBAR PROMO) --- */}
+          {/* --- KOLOM KANAN: VISUAL INTERAKTIF --- */}
+          {/* --- KOLOM KANAN: VISUAL INTERAKTIF --- */}
           <motion.div
             initial={{ opacity: 0, x: 50 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.2 }}
-            className="relative"
+            className="order-1 lg:order-2 relative h-[400px] md:h-[500px] w-full rounded-3xl overflow-hidden shadow-2xl hover-container group cursor-pointer"
           >
-            {/* Background Blob/Decoration (Opsional, agar tidak sepi) */}
-            <div className="absolute -top-10 -right-10 w-64 h-64 bg-primary/5 rounded-full blur-3xl -z-10"></div>
-            <div className="absolute -bottom-10 -left-10 w-64 h-64 bg-secondary/10 rounded-full blur-3xl -z-10"></div>
+            {/* 1. BACKGROUND GELAP */}
+            <div className="absolute inset-0 bg-slate-900 transition-transform duration-700 group-hover:scale-105">
+              <Image
+                src="https://images.unsplash.com/photo-1487014679447-9f8336841d58?q=80&w=2805&auto=format&fit=crop"
+                alt="Background Texture"
+                fill
+                className="object-cover opacity-20 mix-blend-overlay"
+              />
+              <div className="absolute inset-0 bg-gradient-to-br from-amber-200 via-yellow-400 to-amber-600" />
+            </div>
 
-            {/* Card Gambar Utama */}
-            <div className="relative rounded-3xl overflow-hidden shadow-2xl border border-slate-100 group">
-              {/* PLACEHOLDER IMAGE:
-                   Ganti src ini dengan gambar banner promo Anda (misal: gambar laptop/diskon).
-                   Untuk contoh, saya pakai placeholder dengan rasio 16:9 yang pas.
-                */}
-              <div className="relative aspect-video w-full bg-slate-100">
-                <Image
-                  src="" // Pastikan gambar ini ada di public/images
-                  alt="Promo Pembuatan Website Murah"
-                  fill
-                  className="object-cover transition-transform duration-700 group-hover:scale-105"
-                  onError={(e) => {
-                    // Fallback image jika file belum ada
-                    (e.target as HTMLImageElement).src =
-                      "https://placehold.co/800x500/9E3B3B/FFFFFF?text=Promo+Website+650k";
-                  }}
-                />
+            {/* --- ITEM 1: DESKTOP CARD --- */}
+            <div className="absolute top-12 right-[-20px] md:right-8 w-3/4 h-64 bg-white rounded-xl shadow-2xl border border-slate-700/50 p-4 animate-float z-10 transition-all duration-500 ease-out group-hover:scale-[1.03] group-hover:translate-y-2 group-hover:shadow-[0_20px_60px_rgba(255,255,255,0.15)]">
+              {/* Browser Header */}
+              <div className="flex items-center gap-2 mb-4 border-b border-slate-100 pb-2">
+                <div className="flex gap-1.5">
+                  <div className="w-2.5 h-2.5 rounded-full bg-red-400" />
+                  <div className="w-2.5 h-2.5 rounded-full bg-amber-400" />
+                  <div className="w-2.5 h-2.5 rounded-full bg-green-400" />
+                </div>
+                <div className="bg-slate-100 rounded text-[10px] px-2 py-0.5 text-slate-400 font-mono ml-2">
+                  bisnisanda.com
+                </div>
+              </div>
 
-                {/* Overlay Gradient Halus (Biar teks di gambar terbaca jika ada) */}
-                <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent pointer-events-none"></div>
+              {/* Content Skeleton */}
+              <div className="space-y-3 relative">
+                <div className="w-1/2 h-4 bg-slate-200 rounded animate-pulse" />
+                <div className="w-full h-20 bg-slate-50 rounded border-2 border-dashed border-slate-200 flex items-center justify-center text-xs text-slate-400">
+                  Hero Section Area
+                </div>
+                <div className="flex gap-2">
+                  <div className="w-1/3 h-12 bg-slate-100 rounded" />
+                  <div className="w-1/3 h-12 bg-slate-100 rounded" />
+                  <div className="w-1/3 h-12 bg-slate-100 rounded" />
+                </div>
+
+                {/* --- PERBAIKAN POSISI KURSOR --- 
+                      Kita pindahkan kursor ke dalam area konten (bukan di luar kartu) 
+                      agar tidak tertutup oleh kartu Mobile yang ada di layer depan.
+                  */}
+                <div className="absolute top-10 right-20 z-50 pointer-events-none">
+                  {/* Badge "Nuhawebteam" */}
+                  <div className="absolute -top-8 -left-2 transition-transform duration-500 ease-out group-hover:scale-110 group-hover:-translate-y-2">
+                    <div className="bg-primary text-white text-[10px] font-bold px-2 py-1 rounded shadow-md ring-2 ring-white whitespace-nowrap">
+                      BanggapunyawebTeam
+                    </div>
+                  </div>
+
+                  {/* Icon Mouse */}
+                  <div className="drop-shadow-lg transition-transform duration-500 ease-out group-hover:scale-[1.4] group-hover:translate-x-2 group-hover:translate-y-2">
+                    {/* Menggunakan fill-green-600 dan stroke-white agar kontras */}
+                    <MousePointer2
+                      className="w-6 h-6 text-white fill-primary"
+                      strokeWidth={2}
+                    />
+                  </div>
+                </div>
               </div>
             </div>
 
-            {/* Floating Badge (Pemanis UI) */}
-            <div className="absolute -bottom-6 -left-6 md:bottom-8 md:-left-12 bg-white p-4 rounded-2xl shadow-xl border border-slate-100 flex items-center gap-4 animate-bounce duration-[3000ms]">
-              <div className="bg-green-100 p-3 rounded-full text-green-600">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  className="h-6 w-6"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                  strokeWidth={2}
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
-                  />
-                </svg>
-              </div>
-              <div>
-                <p className="text-xs text-slate-400 font-semibold uppercase">
-                  Garansi
-                </p>
-                <p className="text-slate-800 font-bold">Uang Kembali 100%</p>
+            {/* --- ITEM 2: MOBILE CARD (Layer Depan / Z-20) --- */}
+            <div className="absolute bottom-[-40px] left-8 md:left-12 w-48 md:w-56 h-80 bg-slate-200 rounded-xl shadow-[0_20px_50px_rgba(0,0,0,0.5)] border-4 border-white p-3 animate-float-delayed z-20 transition-all duration-500 ease-out group-hover:scale-[1.03] group-hover:-translate-y-4">
+              <div className="w-1/3 h-2 bg-slate-400 rounded-full mb-4 mx-auto opacity-50" />
+              <div className="space-y-3">
+                <div className="w-full h-24 bg-white rounded-lg shadow-sm" />
+                <div className="flex gap-2">
+                  <div className="w-1/2 h-20 bg-white rounded-lg shadow-sm" />
+                  <div className="w-1/2 h-20 bg-white rounded-lg shadow-sm" />
+                </div>
+                <div className="w-full h-4 bg-slate-300/50 rounded w-3/4" />
               </div>
             </div>
+
+            {/* Decoration Lines */}
+            <svg
+              className="absolute inset-0 pointer-events-none z-0 opacity-30 group-hover:opacity-60 transition-opacity duration-500"
+              width="100%"
+              height="100%"
+            >
+              <line
+                x1="20%"
+                y1="80%"
+                x2="60%"
+                y2="40%"
+                stroke="white"
+                strokeWidth="2"
+                strokeDasharray="5,5"
+              />
+              <circle cx="20%" cy="80%" r="4" fill="white" />
+            </svg>
           </motion.div>
         </div>
       </div>
