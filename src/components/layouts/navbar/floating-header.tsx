@@ -79,11 +79,6 @@ export function FloatingHeader() {
           <Button
             size="lg" // Agar terlihat 'fat' seperti di gambar
             className={cn(
-<<<<<<< HEAD:src/components/layouts/navbar/floating-header.tsx.tsx
-              "rounded-full font-bold transition-all duration-300 shadow-md hover:-translate-y-0.5",
-=======
-              "rounded-full font-bold transition-all duration-300 shadow-md hover:-translate-y-0.5 ",
->>>>>>> 2776f2297d5f9d60bd90ccd989efe541b14b22b7:src/components/layouts/navbar/floating-header.tsx
               scrolled
                 ? "bg-secondary text-secondary-foreground hover:bg-secondary/90 hover:shadow-lg" // SCROLLED: Kuning (image_b8583e.png)
                 : "bg-white text-primary hover:bg-white/90 hover:text-red-700 hover:shadow-white/20" // TOP: Putih Teks Merah (image_b85845.png)
